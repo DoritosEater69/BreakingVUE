@@ -1,0 +1,193 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+	<!-- Required meta tags -->
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+	<!-- Bootstrap CSS -->
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+	<style>
+		.classGreen {
+			background-color: green;
+			padding-top: 10px !important;
+			padding-bottom: 10px !important;
+		}
+
+		.classRed {
+			background-color: red;
+			font-weight: bold;
+			padding-top: 10px !important;
+			padding-bottom: 10px !important;
+		}
+
+		.classOrange {
+			background-color: orange;
+			padding-top: 10px !important;
+			padding-bottom: 10px !important;
+		}
+
+		.classGray {
+			background-color: lightgray;
+			padding-top: 10px !important;
+			padding-bottom: 10px !important;
+		}
+
+		.card {
+			border-top-left-radius: 20px;
+			border-bottom-right-radius: 20px;
+			background-color: rgba(0, 0, 0, 0.9) !important;
+			border: 0 !important;
+			overflow: hidden;
+		}
+
+		.card-body-modified {
+			padding: 0 !Important;
+			margin: 0 !Important;
+		}
+
+		p {
+			padding: 0 !Important;
+			margin: 0 !Important;
+		}
+
+		.charName {
+			background-color: #FFFFFF !important;
+			color: #000000;
+			padding-top: 10px !important;
+			padding-bottom: 10px !important;
+		}
+	</style>
+
+</head>
+
+<body id="app">
+
+	<div class="container">
+		<div class="row text-center">
+			<div class="col-12 mt-5">
+				<div class="row">
+					<div class="col-12 pb-5">
+						<h2>Content of Breaking Bad Api</h2>
+					</div>
+					<div class="row">
+
+						<!-- For every data in import -> call data values -->
+						<div class="col-12 py-3" v-if="filter">
+							<h2> {{ filter | capitalize }} {{ titleText }}</h2>
+						</div>
+						<div class="col-3" v-for="data in import">
+							<div class="row my-4">
+								<div class="col-12">
+									<div class="card-group">
+										<div class="card text-white bg-dark mb-3" style="max-width: 18rem;" v-if="filter=='characters'">
+											<div class="card-header"><b>Name</b></div>
+											<h4 class="charName">{{ data.name }} </h4>
+											<div class="card-body">
+												<h5 class="card-title"><b>Nickname</b></h5>
+												<p class="card-text pb-4">{{ data.nickname }}</p>
+												<p class="card-text"><b>Occupation</b></p>
+												<p class="card-text pb-4">{{ data.occupation }}</p>
+												<p class="card-text"><b>Status</b></p>
+											</div>
+											<div class="card-body-modified">
+												<p :class="{'classGreen': data.status == 'Alive', 'classRed': data.status == 'Deceased', 'classOrange': data.status == 'Presumed dead', 'classGray': data.status == '?'}">{{ data.status }}</p>
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="col-12">
+									<div class="card-group">
+										<div class="card text-white bg-dark mb-3" style="max-width: 18rem;" v-if="filter=='quotes'">
+											<div class="card-header"><b>Series</b></div>
+											<p class="card-header">{{ data.series }}</p>
+											<div class="card-body">
+												<h5 class="card-title"><b>Quote</b></h5>
+												<i>"{{ data.quote }}"</i>
+												<p class="card-text text-right pt-4"><b>-</b>{{ data.author }}</p>
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="col-12">
+									<div class="card-group">
+										<div class="card text-white bg-dark mb-3" style="max-width: 18rem;" v-if="filter=='deaths'">
+											<div class="card-header"><b>Name</b></div>
+											<p class="card-header">{{ data.death }}</p>
+											<div class="card-body">
+												<h5 class="card-title"><b>Cause of Death</b></h5>
+												<p class="card-text" :class="'classRed'">{{ data.cause }}</p>
+												<p class="card-text"><b>Responsible</b></p>
+												<p class="card-text">{{ data.responsible }}</p>
+												<p class="card-text"><b>Last Words</b></p>
+												<p class="card-text">{{ data.last_words }}</p>
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="col-12">
+									<div class="card-group">
+										<div class="card text-white bg-dark mb-3" style="max-width: 18rem;" v-if="filter=='episodes'">
+											<div class="card-header"><b>Episode</b></div>
+											<h4>{{ data.episode }}</h4>
+											<div class="card-body">
+												<h5 class="card-title"><b>Title</b></h5>
+												<p class="card-text pb-4">{{ data.title }}</p>
+												<p class="card-text"><b>Characters</b></p>
+												<p class="card-text pb-4">{{ data.characters }}</p>
+												<p class="card-text"><b>Air Date</b></p>
+												<p class="card-text pb-4">{{ data.air_date }}</p>
+												<p class="card-text"><b>Series</b></p>
+												<p class="card-text">{{ data.series }}</p>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-12 d-flex justify-content-center">
+						<div class="form-group d-flex flex-column">
+							<div class="row d-flex flex-column">
+								<div class="col-12">
+									<!-- Parameter = filter // if Textfield gets changed -> method setfilter() with filter parameter gets called -->
+									<input type="email" class="form-control" placeholder="Enter one of the below options" v-model="filter" @change="setFilter(filter)">
+									<button type="button" class="btn btn-secondary my-4" @click="orderNameAsc()">Ascending Order</button>
+								</div>
+
+								<!-- All filter options are listed -->
+								<div class="row d-flex flex-column">
+									<div class="col-12 text-left py-4">
+										<p>Available Categories</p>
+										<p v-for="filter in filters">
+
+											{{ filter }}
+										</p>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+
+
+	<!-- Optional JavaScript -->
+	<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/vue/1.0.18/vue.js"></script>
+	<script src="https://unpkg.com/axios/dist/axios.js"></script>
+	<script src="script/script.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+</body>
+
+</html>
