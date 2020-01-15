@@ -23,6 +23,12 @@
 			padding-bottom: 10px !important;
 		}
 
+		.roundItem {
+			border-top-left-radius: 20px;
+			border-bottom-right-radius: 20px;
+			margin-bottom: 10px !Important;
+		}
+
 		.classOrange {
 			background-color: orange;
 			padding-top: 10px !important;
@@ -53,18 +59,24 @@
 			margin: 0 !Important;
 		}
 
-		.charName {
+		.title {
 			background-color: #FFFFFF !important;
 			color: #000000;
 			padding-top: 10px !important;
 			padding-bottom: 10px !important;
+		}
+
+		.quoteText {
+			padding-top: 10px;
+			padding-bottom: 10px;
+			border-top: 2px solid white;
+			border-bottom: 2px solid white;
 		}
 	</style>
 
 </head>
 
 <body id="app">
-
 	<div class="container">
 		<div class="row text-center">
 			<div class="col-12 mt-5">
@@ -73,18 +85,17 @@
 						<h2>Content of Breaking Bad Api</h2>
 					</div>
 					<div class="row">
-
 						<!-- For every data in import -> call data values -->
 						<div class="col-12 py-3" v-if="filter">
 							<h2> {{ filter | capitalize }} {{ titleText }}</h2>
 						</div>
-						<div class="col-3" v-for="data in import">
+						<div class="col-12 col-sm-4 col-md-3" v-for="data in import">
 							<div class="row my-4">
 								<div class="col-12">
 									<div class="card-group">
 										<div class="card text-white bg-dark mb-3" style="max-width: 18rem;" v-if="filter=='characters'">
 											<div class="card-header"><b>Name</b></div>
-											<h4 class="charName">{{ data.name }} </h4>
+											<h4 class="title">{{ data.name }} </h4>
 											<div class="card-body">
 												<h5 class="card-title"><b>Nickname</b></h5>
 												<p class="card-text pb-4">{{ data.nickname }}</p>
@@ -102,10 +113,12 @@
 									<div class="card-group">
 										<div class="card text-white bg-dark mb-3" style="max-width: 18rem;" v-if="filter=='quotes'">
 											<div class="card-header"><b>Series</b></div>
-											<p class="card-header">{{ data.series }}</p>
+											<h4 class="card-header title">{{ data.series }}</h4>
 											<div class="card-body">
-												<h5 class="card-title"><b>Quote</b></h5>
-												<i>"{{ data.quote }}"</i>
+												<h5 class="card-title pb-3"><b>Quote</b></h5>
+												<div class="quoteText">
+													<i>"{{ data.quote }}"</i>
+												</div>
 												<p class="card-text text-right pt-4"><b>-</b>{{ data.author }}</p>
 											</div>
 										</div>
@@ -115,12 +128,12 @@
 									<div class="card-group">
 										<div class="card text-white bg-dark mb-3" style="max-width: 18rem;" v-if="filter=='deaths'">
 											<div class="card-header"><b>Name</b></div>
-											<p class="card-header">{{ data.death }}</p>
+											<h4 class="title">{{ data.death }}</h4>
 											<div class="card-body">
 												<h5 class="card-title"><b>Cause of Death</b></h5>
-												<p class="card-text" :class="'classRed'">{{ data.cause }}</p>
+												<p class="card-text" :class="'classRed roundItem'">{{ data.cause }}</p>
 												<p class="card-text"><b>Responsible</b></p>
-												<p class="card-text">{{ data.responsible }}</p>
+												<p class="card-text py-4">{{ data.responsible }}</p>
 												<p class="card-text"><b>Last Words</b></p>
 												<p class="card-text">{{ data.last_words }}</p>
 											</div>
@@ -131,16 +144,16 @@
 									<div class="card-group">
 										<div class="card text-white bg-dark mb-3" style="max-width: 18rem;" v-if="filter=='episodes'">
 											<div class="card-header"><b>Episode</b></div>
-											<h4>{{ data.episode }}</h4>
+											<h4 class="title">{{ data.episode }}</h4>
 											<div class="card-body">
 												<h5 class="card-title"><b>Title</b></h5>
-												<p class="card-text pb-4">{{ data.title }}</p>
+												<p class="card-text py-4">{{ data.title }}</p>
 												<p class="card-text"><b>Characters</b></p>
-												<p class="card-text pb-4">{{ data.characters }}</p>
-												<p class="card-text"><b>Air Date</b></p>
-												<p class="card-text pb-4">{{ data.air_date }}</p>
+												<p class="card-text py-4">{{ data.characters }}</p>
+												<p class="card-text pb-4"><b>Air Date</b></p>
+												<p class="card-text classRed roundItem">{{ data.air_date }}</p>
 												<p class="card-text"><b>Series</b></p>
-												<p class="card-text">{{ data.series }}</p>
+												<p class="card-text pt-4">{{ data.series }}</p>
 											</div>
 										</div>
 									</div>
