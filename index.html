@@ -89,72 +89,66 @@
 						<div class="col-12 py-3" v-if="filter">
 							<h2> {{ filter | capitalize }} {{ titleText }}</h2>
 						</div>
-						<div class="col-12 col-sm-4 col-md-3" v-for="data in import">
-							<div class="row my-4">
+					</div>
+					<div class="row">
+						<div class="col-3" v-for="data in import">
+							<div class="row my-4 ">
 								<div class="col-12">
-									<div class="card-group">
-										<div class="card text-white bg-dark mb-3" style="max-width: 18rem;" v-if="filter=='characters'">
-											<div class="card-header"><b>Name</b></div>
-											<h4 class="title">{{ data.name }} </h4>
-											<div class="card-body">
-												<h5 class="card-title"><b>Nickname</b></h5>
-												<p class="card-text pb-4">{{ data.nickname }}</p>
-												<p class="card-text"><b>Occupation</b></p>
-												<p class="card-text pb-4">{{ data.occupation }}</p>
-												<p class="card-text"><b>Status</b></p>
-											</div>
-											<div class="card-body-modified">
-												<p :class="{'classGreen': data.status == 'Alive', 'classRed': data.status == 'Deceased', 'classOrange': data.status == 'Presumed dead', 'classGray': data.status == '?'}">{{ data.status }}</p>
-											</div>
+									<div class="card text-white bg-dark mb-3" style="max-width: 18rem;" v-if="filter=='characters'">
+										<div class="card-header"><b>Name</b></div>
+										<h4 class="title">{{ data.name }} </h4>
+										<div class="card-body">
+											<h5 class="card-title"><b>Nickname</b></h5>
+											<p class="card-text pb-4">{{ data.nickname }}</p>
+											<p class="card-text"><b>Occupation</b></p>
+											<p class="card-text pb-4">{{ data.occupation }}</p>
+											<p class="card-text"><b>Status</b></p>
+										</div>
+										<div class="card-body-modified">
+											<p :class="{'classGreen': data.status == 'Alive', 'classRed': data.status == 'Deceased', 'classOrange': data.status == 'Presumed dead', 'classGray': data.status == '?'}">{{ data.status }}</p>
 										</div>
 									</div>
 								</div>
 								<div class="col-12">
-									<div class="card-group">
-										<div class="card text-white bg-dark mb-3" style="max-width: 18rem;" v-if="filter=='quotes'">
-											<div class="card-header"><b>Series</b></div>
-											<h4 class="card-header title">{{ data.series }}</h4>
-											<div class="card-body">
-												<h5 class="card-title pb-3"><b>Quote</b></h5>
-												<div class="quoteText">
-													<i>"{{ data.quote }}"</i>
-												</div>
-												<p class="card-text text-right pt-4"><b>-</b>{{ data.author }}</p>
+									<div class="card text-white bg-dark mb-3" style="max-width: 18rem;" v-if="filter=='quotes'">
+										<div class="card-header"><b>Series</b></div>
+										<h4 class="card-header title">{{ data.series }}</h4>
+										<div class="card-body">
+											<h5 class="card-title pb-3"><b>Quote</b></h5>
+											<div class="quoteText">
+												<i>"{{ data.quote }}"</i>
 											</div>
+											<p class="card-text text-right pt-4"><b>-</b>{{ data.author }}</p>
 										</div>
 									</div>
 								</div>
 								<div class="col-12">
-									<div class="card-group">
-										<div class="card text-white bg-dark mb-3" style="max-width: 18rem;" v-if="filter=='deaths'">
-											<div class="card-header"><b>Name</b></div>
-											<h4 class="title">{{ data.death }}</h4>
-											<div class="card-body">
-												<h5 class="card-title"><b>Cause of Death</b></h5>
-												<p class="card-text" :class="'classRed roundItem'">{{ data.cause }}</p>
-												<p class="card-text"><b>Responsible</b></p>
-												<p class="card-text py-4">{{ data.responsible }}</p>
-												<p class="card-text"><b>Last Words</b></p>
-												<p class="card-text">{{ data.last_words }}</p>
-											</div>
+									<div class="card text-white bg-dark mb-3" style="max-width: 18rem;" v-if="filter=='deaths'">
+										<div class="card-header"><b>Name</b></div>
+										<h4 class="title">{{ data.death }}</h4>
+										<div class="card-body">
+											<h5 class="card-title"><b>Cause of Death</b></h5>
+											<p class="card-text" :class="'classRed roundItem'">{{ data.cause }}</p>
+											<p class="card-text"><b>Responsible</b></p>
+											<p class="card-text py-4">{{ data.responsible }}</p>
+											<p class="card-text"><b>Last Words</b></p>
+											<p class="card-text">{{ data.last_words }}</p>
 										</div>
 									</div>
 								</div>
 								<div class="col-12">
-									<div class="card-group">
-										<div class="card text-white bg-dark mb-3" style="max-width: 18rem;" v-if="filter=='episodes'">
-											<div class="card-header"><b>Episode</b></div>
-											<h4 class="title">{{ data.episode }}</h4>
-											<div class="card-body">
-												<h5 class="card-title"><b>Title</b></h5>
-												<p class="card-text py-4">{{ data.title }}</p>
-												<p class="card-text"><b>Characters</b></p>
-												<p class="card-text py-4">{{ data.characters }}</p>
-												<p class="card-text pb-4"><b>Air Date</b></p>
-												<p class="card-text classRed roundItem">{{ data.air_date }}</p>
-												<p class="card-text"><b>Series</b></p>
-												<p class="card-text pt-4">{{ data.series }}</p>
-											</div>
+									<div class="card text-white bg-dark mb-3" style="max-width: 18rem;" v-if="filter=='episodes'">
+										<div class="card-header"><b>Episode</b></div>
+										<h4 class="title">{{ data.episode }}</h4>
+										<div class="card-body">
+											<h5 class="card-title"><b>Title</b></h5>
+											<p class="card-text py-4">{{ data.title }}</p>
+											<p class="card-text"><b>Characters</b></p>
+											<p class="card-text py-4">{{ data.characters }}</p>
+											<p class="card-text pb-4"><b>Air Date</b></p>
+											<p class="card-text classRed roundItem">{{ data.air_date }}</p>
+											<p class="card-text"><b>Series</b></p>
+											<p class="card-text pt-4">{{ data.series }}</p>
 										</div>
 									</div>
 								</div>
