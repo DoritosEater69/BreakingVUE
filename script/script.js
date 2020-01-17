@@ -18,8 +18,6 @@ new Vue({
 		},
 
 		orderNameAsc: function () {
-			var arr = [];
-			console.log("in Function");
 			let imported = this.import;
 
 			return imported
